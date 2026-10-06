@@ -15,6 +15,7 @@ const sortSelect = document.getElementById("sort");
 const resetBtn = document.getElementById("reset");
 const grid = document.getElementById("grid");
 const countEl = document.getElementById("count");
+render();
 
 function getFiltered() {
   let result = products;
@@ -40,6 +41,7 @@ function getFiltered() {
 }
 
 function render() {
+  grid.replaceChildren();
   const items = getFiltered();
   items.forEach((p) => {
     const card = document.createElement("div");
