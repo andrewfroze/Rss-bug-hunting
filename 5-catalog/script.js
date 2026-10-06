@@ -15,31 +15,33 @@ const sortSelect = document.getElementById("sort");
 const resetBtn = document.getElementById("reset");
 const grid = document.getElementById("grid");
 const countEl = document.getElementById("count");
+render();
 
 function getFiltered() {
-  let result = products;
+  let result = [...products];
   const search = searchInput.value;
   const category = categorySelect.value;
   const sort = sortSelect.value;
 
-  if (search) {
-    result = result.filter((p) => p.name === search);
-  }
-
   if (category !== "all") {
-    result = products.filter((p) => p.category !== category);
+    result = products.filter((p) => p.category === category);
   }
 
   if (sort === "asc") {
-    result.sort((a, b) => b.price - a.price);
-  } else if (sort === "desc") {
     result.sort((a, b) => a.price - b.price);
+  } else if (sort === "desc") {
+    result.sort((a, b) => b.price - a.price);
+  }
+
+  if (search) {
+    result = result.filter((p) => p.name.toLowerCase().replaceAll(/[^a-z0-9]/g, '').toLowerCase().includes(search.toLowerCase().replaceAll(/[^a-z0-9]/g, '')));
   }
 
   return result;
 }
 
 function render() {
+  grid.replaceChildren();
   const items = getFiltered();
   items.forEach((p) => {
     const card = document.createElement("div");
@@ -56,4 +58,7 @@ sortSelect.addEventListener("change", render);
 
 resetBtn.addEventListener("click", () => {
   searchInput.value = "";
+  categorySelect.value = "all";
+  sortSelect.value = "default";
+  render();
 });
