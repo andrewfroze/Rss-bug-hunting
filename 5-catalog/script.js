@@ -24,7 +24,7 @@ function getFiltered() {
   const sort = sortSelect.value;
 
   if (search) {
-    result = result.filter((p) => p.name === search);
+    result = result.filter((p) => p.name.toLowerCase().replaceAll(/[^a-z0-9]/g, '').toLowerCase().includes(search.toLowerCase().replaceAll(/[^a-z0-9]/g, '')));
   }
 
   if (category !== "all") {
