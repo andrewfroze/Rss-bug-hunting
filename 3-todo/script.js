@@ -13,7 +13,7 @@ let nextId = 1;
 function addTask() {
   const text = input.value;
   if (text.trim() === '') {
-    alert('Введите текст задачи');
+    errorEl.hidden = false;
     return;
   }
   errorEl.hidden = true;
