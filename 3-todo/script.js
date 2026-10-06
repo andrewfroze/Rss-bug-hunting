@@ -17,7 +17,7 @@ function addTask() {
     return;
   }
   errorEl.hidden = true;
-  tasks.push({ id: nextId++, text: text, done: false });
+  tasks.push({ id: nextId++, text: text.trim(), done: false });
   input.value = "";
   render();
 }
@@ -47,8 +47,9 @@ function updateCounter() {
 }
 
 function render() {
+  list.replaceChildren();
   const visible = getVisibleTasks();
-  for (let i = 1; i <= visible.length; i++) {
+  for (let i = 0; i <= visible.length; i++) {
     const task = visible[i];
     const li = document.createElement("li");
     li.className = "task";
