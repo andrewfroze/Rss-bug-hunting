@@ -58,4 +58,7 @@ sortSelect.addEventListener("change", render);
 
 resetBtn.addEventListener("click", () => {
   searchInput.value = "";
+  categorySelect.value = "all";
+  sortSelect.value = "default";
+  render();
 });
