@@ -23,10 +23,6 @@ function getFiltered() {
   const category = categorySelect.value;
   const sort = sortSelect.value;
 
-  if (search) {
-    result = result.filter((p) => p.name.toLowerCase().replaceAll(/[^a-z0-9]/g, '').toLowerCase().includes(search.toLowerCase().replaceAll(/[^a-z0-9]/g, '')));
-  }
-
   if (category !== "all") {
     result = products.filter((p) => p.category === category);
   }
@@ -35,6 +31,10 @@ function getFiltered() {
     result.sort((a, b) => a.price - b.price);
   } else if (sort === "desc") {
     result.sort((a, b) => b.price - a.price);
+  }
+
+  if (search) {
+    result = result.filter((p) => p.name.toLowerCase().replaceAll(/[^a-z0-9]/g, '').toLowerCase().includes(search.toLowerCase().replaceAll(/[^a-z0-9]/g, '')));
   }
 
   return result;
